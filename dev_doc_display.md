@@ -4,9 +4,9 @@
 
 |          |        Value         |
 | :------: | :------------------: |
-|   URL    |      `/search`       |
+|   URL    |      `/api/search`       |
 | 请求方式 |        `GET`         |
-|   示例   | `/search?key=Bengio` |
+|   示例   | `/api/search?key=Bengio` |
 
 - 请求参数
 
@@ -102,9 +102,9 @@
 
 |          |        Value         |
 | :------: | :------------------: |
-|   URL    |      `/author`       |
+|   URL    |      `/api/author`       |
 | 请求方式 |        `GET`         |
-|   示例   | `/author?authorId=1741101` |
+|   示例   | `/api/author?authorId=1741101` |
 
 - 请求参数
 
