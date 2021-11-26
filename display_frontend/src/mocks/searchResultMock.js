@@ -1,5 +1,5 @@
 import Mock from 'mockjs';
-import AuthorMock from "./authorMock";
+// import AuthorMock from "./authorMock";
 const Random = Mock.Random;
 
 

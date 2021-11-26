@@ -1,9 +1,9 @@
 import React from "react";
-import {Avatar, Link, ListItem, ListItemAvatar, ListItemText} from "@mui/material";
+import {Avatar, Link} from "@mui/material";
 import bengioPng from "../assets/bengio.png";
 import {Item, Row} from "@mui-treasury/components/flex";
-import { useDynamicAvatarStyles } from '@mui-treasury/styles/avatar/dynamic';
-import { useTrendInfoStyles } from '@mui-treasury/styles/info/trend';
+import {useDynamicAvatarStyles} from '@mui-treasury/styles/avatar/dynamic';
+import {useTrendInfoStyles} from '@mui-treasury/styles/info/trend';
 import {Info, InfoSubtitle, InfoTitle} from "@mui-treasury/components/info";
 
 

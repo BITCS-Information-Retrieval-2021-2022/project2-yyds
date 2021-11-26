@@ -1,10 +1,10 @@
 import {useParams} from "react-router-dom";
-import {Box, List, Pagination, Paper, Stack, Typography, Grid, Divider} from "@mui/material";
+import {Box, CssBaseline, Divider, Grid, Pagination, Stack} from "@mui/material";
 import Copyright from "../components/Copyright";
 import React, {useEffect, useState} from "react";
 import NavigationBar from "../components/NavigationBar";
 import axios from "axios";
-import "../mocks/authorProfileMock";  //uncomment this line to use Mock //TODO: comment this line
+// import "../mocks/authorProfileMock"; //uncomment this line to use Mock //TODO: comment this line
 import AuthorAbstract from "../components/AuthorAbstract";
 import PaperAbstract from "../components/PaperAbstract";
 import {Column} from "@mui-treasury/components/flex";
@@ -43,6 +43,8 @@ function AuthorProfile(){
   };
 
   return (
+    <React.Fragment>
+    <CssBaseline />
     <Grid
       container
       sx={{margin: 'auto'}}
@@ -111,6 +113,7 @@ function AuthorProfile(){
         <Copyright />
       </Grid>
     </Grid>
+    </React.Fragment>
   );
 }
 

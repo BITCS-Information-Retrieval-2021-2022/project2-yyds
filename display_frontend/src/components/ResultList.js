@@ -1,9 +1,9 @@
-import React, {useEffect, useLayoutEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
-import {Box, Divider, Grid, List, ListItem, ListItemText, Pagination, Stack, Typography} from "@mui/material";
-import "../mocks/searchResultMock";  //uncomment this line to use Mock //TODO: comment this line
+import {Divider, Grid, Pagination, Stack} from "@mui/material";
+// import "../mocks/searchResultMock"; //uncomment this line to use Mock //TODO: comment this line
 import AuthorAbstract from "./AuthorAbstract";
-import {Column, Row} from "@mui-treasury/components/flex";
+import {Column} from "@mui-treasury/components/flex";
 import config from "../config";
 
 
@@ -75,7 +75,8 @@ function ResultList(props){
         width: '90%',
         borderRadius: 16,
         boxShadow: '0 8px 16px 0 #BDC9D7',
-        overflow: 'hidden'}}
+        overflow: 'hidden'
+      }}
       >
         {authorList && authorList.slice(numsPerPage*(page-1), numsPerPage*page).map((author, index) => (
           <React.Fragment>

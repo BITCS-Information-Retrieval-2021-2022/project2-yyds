@@ -1,4 +1,4 @@
-import {Box, Container, Grid, Link, Typography} from "@mui/material";
+import {Box, Grid, Link, Typography} from "@mui/material";
 import SearchBar from "./SearchBar";
 import React from "react";
 
@@ -10,7 +10,8 @@ function NavigationBar(props) {
       alignItems={"center"}
       position={"fixed"}
       zIndex={9999}
-      top={0} left={0} right={0}
+      top={0}
+      left={0} right={0}
       bgcolor={"#d9e2ee"}
       height={"80px"}
     >

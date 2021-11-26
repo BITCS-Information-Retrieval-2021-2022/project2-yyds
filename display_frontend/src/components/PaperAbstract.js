@@ -1,7 +1,6 @@
-import {Avatar, Link, ListItem, ListItemText} from "@mui/material";
+import {Link} from "@mui/material";
 import React from "react";
 import {Item, Row} from "@mui-treasury/components/flex";
-import bengioPng from "../assets/bengio.png";
 import {Info, InfoSubtitle, InfoTitle} from "@mui-treasury/components/info";
 import {useTrendInfoStyles} from "@mui-treasury/styles/info/trend";
 

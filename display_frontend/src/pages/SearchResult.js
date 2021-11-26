@@ -1,33 +1,36 @@
 import React from "react";
 import {useParams} from "react-router-dom";
-import {Box, Container, Grid, Paper} from "@mui/material";
+import {CssBaseline, Grid} from "@mui/material";
 import Copyright from "../components/Copyright";
 import ResultList from "../components/ResultList";
-import SearchBar from "../components/SearchBar";
+// import SearchBar from "../components/SearchBar";
 import NavigationBar from "../components/NavigationBar";
 
 
 function SearchResult(){
   let {searchKey} = useParams();
   return (
-    <Grid
-      container
-      sx={{margin: 'auto'}}
-      justifyContent={"center"}
-    >
-      <Grid item md={12}>
-        <NavigationBar searchKey={searchKey}/>
+    <React.Fragment>
+      <CssBaseline />
+      <Grid
+        container
+        sx={{margin: 'auto'}}
+        justifyContent={"center"}
+      >
+        <Grid item md={12}>
+          <NavigationBar searchKey={searchKey}/>
+        </Grid>
+          {/*<SearchBar searchKey={searchKey} />*/}
+        <Grid item md={12} marginX={"2.5%"} marginTop={"80px"}>
+          <ResultList searchKey={searchKey} />
+        </Grid>
+          {/*{props.params.searchKey}*/}
+          {/*{searchKey}*/}
+        <Grid item md={12}>
+          <Copyright />
+        </Grid>
       </Grid>
-        {/*<SearchBar searchKey={searchKey} />*/}
-      <Grid item md={12} marginX={"2.5%"} marginTop={"80px"}>
-        <ResultList searchKey={searchKey} />
-      </Grid>
-        {/*{props.params.searchKey}*/}
-        {/*{searchKey}*/}
-      <Grid item md={12}>
-        <Copyright />
-      </Grid>
-    </Grid>
+    </React.Fragment>
   );
 }
 

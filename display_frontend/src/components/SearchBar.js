@@ -1,7 +1,7 @@
-import {useEffect, useState} from "react";
-import {Box, Button, Link, TextField, Typography} from "@mui/material";
-import axios from "axios";
-import {Link as RouterLink, MemoryRouter as Router} from "react-router-dom";
+import {useState} from "react";
+import {Box, Button, TextField} from "@mui/material";
+// import axios from "axios";
+import {Link as RouterLink} from "react-router-dom";
 // import "../mocks/searchResultMock";
 
 
