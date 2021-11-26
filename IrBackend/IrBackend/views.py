@@ -4,7 +4,7 @@ import requests
 from requests import status_codes
 
 POST_FORM = '''
-<form method='post' action='/search/'>
+<form method='post' action='/api/search/'>
     Search keyword: <input type='text' name='key'>
     <input type='submit' value='post'>
 </form>
@@ -16,16 +16,22 @@ def search_view(request):
     url = 'http://101.35.199.231:9200/scholardb/_search?'
     headers = {'Content-Type': 'application/json'}
     if request.method == 'GET':
-        namekey = request.GET.get('key', '')
+        key = request.GET.get('key', '')
 
     elif request.method == 'POST':
-        namekey = request.POST.get('key', '')
+        key = request.POST.get('key', '')
 
     else:
         return HttpResponse(status_codes='404')
 
     args = dict()
-    args['query'] = {'match': {'name': '%s' % namekey}}
+    args['query'] = {'dis_max':{'queries':[ 
+            {'match': {'name': '%s' % key}}, 
+            {'match': {'academicTitle': '%s' % key}},
+            {'match': {'affiliations': '%s' % key}},
+            {'match': {'papers.fieldsOfStudy': '%s' % key}},
+            {'match': {'papers.title': '%s' % key}},
+        ]}}
     # actully we still need fieldsOfStudy!
     args['_source'] = {'exclude':['coAuthors', 'papers']}
     # query['sort'] = [{'paperCount':'desc'}]

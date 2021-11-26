@@ -19,12 +19,12 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.hello_view),
+    path('api/', views.hello_view),
     # pass namekey through query arguments
-    path('search/', views.search_view),
+    path('api/search/', views.search_view),
     # pass authorId through query arguments
-    re_path('^author/$', views.author_view),
+    re_path('^api/author/$', views.author_view),
     # pass authorId through URL path
-    path('author/<str:authorid>', views.author_view),
+    path('api/author/<str:authorid>', views.author_view),
     
 ]
