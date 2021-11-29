@@ -2,6 +2,7 @@ import {useState} from "react";
 import {Box, Button, TextField} from "@mui/material";
 // import axios from "axios";
 import {Link as RouterLink, useNavigate} from "react-router-dom";
+import {SearchRounded} from "@mui/icons-material";
 // import "../mocks/searchResultMock";
 
 
@@ -63,7 +64,15 @@ function SearchBar(props){
     >
       {/*<Grid item md={8}>*/}
       <Box sx={{width: "40%"}}>
-        <TextField id="outlined-basic" sx={{height: "100%", width: "100%"}} label="Search key" variant="outlined"  value={searchItem} onChange={handleInputChange} onKeyPress={handleKeyPress} />
+        <TextField
+          id="outlined-basic"
+          sx={{height: "100%", width: "100%"}}
+          label="Search key"
+          variant="outlined"
+          value={searchItem}
+          onChange={handleInputChange}
+          onKeyPress={handleKeyPress}
+        />
         {/*Notice: the height of TextField is not able to be justified as you want, AFAIK*/}
       </Box>
       {/*</Grid>*/}
@@ -71,7 +80,16 @@ function SearchBar(props){
         {/*<Router>*/}
       {/*<Grid item md={4}>*/}
       <Box sx={{width: "10%", ml: "5%"}}>   {/* ml is inside width */}
-        <Button variant="contained" sx={{height: "100%", width: "100%"}} onClick={handleClick} component={RouterLink} to={`/search/${searchItem}`}>Search</Button>
+        <Button
+          variant="contained"
+          startIcon={<SearchRounded />}
+          sx={{height: "100%", width: "100%"}}
+          onClick={handleClick} 
+          component={RouterLink}
+          to={`/search/${searchItem}`}
+        >
+          Search
+        </Button>
       </Box>
       {/*</Grid>*/}
         {/*</Router>*/}
