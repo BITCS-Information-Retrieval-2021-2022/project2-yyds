@@ -1,8 +1,11 @@
-import {Box, Grid, Link, Typography} from "@mui/material";
+import {Box, Grid, Link, Typography, createTheme, responsiveFontSizes, ThemeProvider} from "@mui/material";
 import SearchBar from "./SearchBar";
 import React from "react";
 
 function NavigationBar(props) {
+  let theme = createTheme();
+  theme = responsiveFontSizes(theme);
+
   return (
     <Grid
       container
@@ -12,27 +15,46 @@ function NavigationBar(props) {
       zIndex={9999}
       top={0}
       left={0} right={0}
-      bgcolor={"#d9e2ee"}
+      // bgcolor={"rgba(169,195,233,0.8)"}
+      bgcolor={"background.paper"}
       height={"80px"}
+      // borderRadius={4}
+      sx={{borderBottomLeftRadius: 8, borderBottomRightRadius: 8}}
+      // borderBottomLeftRadius={4}
+      // borderBottomRightRadius={4}
+      boxShadow={'0 0 8px 0 #BDC9D7'}
     >
       <Grid
         item
         // md={2}
         position={"absolute"}
-        marginLeft={"2vw"}
+        // marginLeft={"2vw"}
+        width={"20%"}
+        height={"inherit"}
       >
-        <Box textAlign={"center"}>
+        <Grid
+          container
+          textAlign={"center"}
+          sx={{height: "inherit", padding: "5px"}}
+          justifyContent={"center"}
+          alignContent={"center"}
+        >
           <Link color="inherit" underline="none" href="/">
-            <Typography variant="body1">
-              YYDS - Scholar Search Engine
-            </Typography>
+            <ThemeProvider theme={theme}>
+              <Typography variant="body1">
+                YYDS
+              </Typography>
+              <Typography variant="body1">
+                Scholar Search Engine
+              </Typography>
+            </ThemeProvider>
           </Link>
-        </Box>
+        </Grid>
       </Grid>
       <Grid
         item
-        md={12}
-        marginTop={"1vh"}
+        xs={12}
+        // marginTop={"1vh"}
       >
         <SearchBar searchKey={props.searchKey} />
       </Grid>

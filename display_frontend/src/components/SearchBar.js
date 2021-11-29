@@ -70,7 +70,7 @@ function SearchBar(props){
       {/*<div>*/}
         {/*<Router>*/}
       {/*<Grid item md={4}>*/}
-      <Box sx={{width: "10%", ml: "5%"}}>
+      <Box sx={{width: "10%", ml: "5%"}}>   {/* ml is inside width */}
         <Button variant="contained" sx={{height: "100%", width: "100%"}} onClick={handleClick} component={RouterLink} to={`/search/${searchItem}`}>Search</Button>
       </Box>
       {/*</Grid>*/}
