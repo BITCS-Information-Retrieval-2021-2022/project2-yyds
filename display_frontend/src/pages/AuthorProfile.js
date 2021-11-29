@@ -4,10 +4,10 @@ import Copyright from "../components/Copyright";
 import React, {useEffect, useState} from "react";
 import NavigationBar from "../components/NavigationBar";
 import axios from "axios";
-// import "../mocks/authorProfileMock"; //uncomment this line to use Mock //TODO: comment this line
+import "../mocks/authorProfileMock"; //uncomment this line to use Mock //TODO: comment this line
 import AuthorAbstract from "../components/AuthorAbstract";
 import PaperAbstract from "../components/PaperAbstract";
-import {Column} from "@mui-treasury/components/flex";
+import {Column, Item, Row} from "@mui-treasury/components/flex";
 import config from "../config";
 import NetworkRelationGraph from "../components/NetworkRelationGraph";
 
@@ -52,11 +52,11 @@ function AuthorProfile(){
     >
       {/*<ResultList />*/}
       {/*{props.params.searchKey}*/}
-      <Grid item md={12}>
+      <Grid item xs={12}>
         <NavigationBar searchKey={""}/>
       </Grid>
       {/*{authorId}*/}
-      <Grid item md={12} marginX={"2.5%"} marginTop={"80px"}>
+      <Grid item xs={12} marginX={"2.5%"} marginTop={"80px"}>
         {/*{console.log(authorProfile)}*/}
         <Grid container>
           <Column p={0} gap={0} marginY={"2vh"} marginX={"auto"} sx={{
@@ -69,13 +69,18 @@ function AuthorProfile(){
           </Column>
         </Grid>
       </Grid>
-      <Grid item md={12}>
-        <Box>
+      <Grid item xs={12} marginX={"2.5%"}>
+        <Box marginX={"auto"} sx={{
+          width: '90%',
+          borderRadius: 4,
+          boxShadow: '0 8px 16px 0 #BDC9D7',
+          padding: '1%'}}
+        >
           {/*{"Network graph."}  /!*TODO: graph*!/*/}
           {authorProfile && <NetworkRelationGraph author={authorProfile}/>}
         </Box>
       </Grid>
-      <Grid item md={12} marginX={"2.5%"}>
+      <Grid item xs={12} marginX={"2.5%"}>
         <Grid container>
           <Column p={0} gap={0} marginY={"2vh"} marginX={"auto"} sx={{
             width: '90%',
@@ -83,6 +88,22 @@ function AuthorProfile(){
             boxShadow: '0 8px 16px 0 #BDC9D7',
             overflow: 'hidden'}}
           >
+            <Row wrap p={2} alignItems={'baseline'} sx={{
+              fontFamily: 'Barlow, san-serif',
+              backgroundColor: '#f2f3f8'}}
+            >
+              <Item stretched sx={{
+                color: '#122740',
+                fontSize: '1.25rem',
+                fontWeight: 600,}}
+              >
+                Paper List
+              </Item>
+              {/*<Item className={styles.actions}>*/}
+              {/*  <Link className={styles.link}>Refresh</Link> •{' '}*/}
+              {/*  <Link className={styles.link}>See all</Link>*/}
+              {/*</Item>*/}
+            </Row>
             {paperList && paperList.slice(paperNumPerPage*(page-1), paperNumPerPage*page).map((paper, index) => (
               // <ListItem key={author["key"]}>   {/*TODO: use unique key*/}
               //   {/*<ListItemAvatar>*/}
@@ -102,14 +123,14 @@ function AuthorProfile(){
             ))}
           </Column>
         </Grid>
-        <Grid item md={12} marginY={"20px"}>
+        <Grid item xs={12} marginY={"20px"}>
           <Stack spacing={2} marginX={"20vw"}>
             {/*<Typography>Page: {page}</Typography>*/}
             <Pagination color={"primary"} variant={"outlined"} shape={"rounded"} sx={{margin: "auto"}} count={Math.ceil(paperNum/paperNumPerPage)} page={page} onChange={handlePageChange} />
           </Stack>
         </Grid>
       </Grid>
-      <Grid item md={12}>
+      <Grid item xs={12}>
         <Copyright />
       </Grid>
     </Grid>
