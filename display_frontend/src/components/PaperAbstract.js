@@ -3,6 +3,7 @@ import React from "react";
 import {Item, Row} from "@mui-treasury/components/flex";
 import {Info, InfoSubtitle, InfoTitle} from "@mui-treasury/components/info";
 import {useTrendInfoStyles} from "@mui-treasury/styles/info/trend";
+import {AttributionRounded, DateRangeRounded, InterestsOutlined} from "@mui/icons-material";
 
 function PaperAbstract(props) {
   const paper = props.paper;
@@ -43,10 +44,12 @@ function PaperAbstract(props) {
               </Link>
             </InfoTitle>
             <InfoSubtitle>
-              {paper["year"] + ", " + paper["venue"]}
+              <DateRangeRounded color={"secondary"} fontSize={"inherit"} /> {paper["year"]} {'\u00A0'}
+              <InterestsOutlined color={"secondary"} fontSize={"inherit"} /> {paper["venue"]}
             </InfoSubtitle>
             {/*<br />*/}
             <InfoSubtitle>
+              <AttributionRounded color={"secondary"} fontSize={"inherit"} />{'\u00A0'}
               {paper["authors"].map((author, index) => (
                 <React.Fragment>
                   {index ? ", ": ""}
