@@ -17,16 +17,16 @@ function SearchResult(){
         sx={{margin: 'auto'}}
         justifyContent={"center"}
       >
-        <Grid item md={12}>
+        <Grid item xs={12}>
           <NavigationBar searchKey={searchKey}/>
         </Grid>
           {/*<SearchBar searchKey={searchKey} />*/}
-        <Grid item md={12} marginX={"2.5%"} marginTop={"80px"}>
+        <Grid item xs={12} marginX={"2.5%"} marginTop={"80px"}>
           <ResultList searchKey={searchKey} />
         </Grid>
           {/*{props.params.searchKey}*/}
           {/*{searchKey}*/}
-        <Grid item md={12}>
+        <Grid item xs={12}>
           <Copyright />
         </Grid>
       </Grid>
