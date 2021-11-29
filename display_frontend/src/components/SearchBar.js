@@ -47,19 +47,33 @@ function SearchBar(props){
 
   return (
     <Box
+      // container
       component="form"
       sx={{
-        '& > :not(style)': { m: 1, width: '35ch' },
+        // '& > :not(style)': {
+          m: 1, width: '100%', height: '50%'
+        // },
       }}
       noValidate
       autoComplete="off"
       display="flex"
       justifyContent="center"
+      alignItems="center"
+      // spacing={"5%"}
     >
-      <TextField id="outlined-basic" label="Search key" variant="outlined" value={searchItem} onChange={handleInputChange} onKeyPress={handleKeyPress} />
+      {/*<Grid item md={8}>*/}
+      <Box sx={{width: "40%"}}>
+        <TextField id="outlined-basic" sx={{height: "100%", width: "100%"}} label="Search key" variant="outlined"  value={searchItem} onChange={handleInputChange} onKeyPress={handleKeyPress} />
+        {/*Notice: the height of TextField is not able to be justified as you want, AFAIK*/}
+      </Box>
+      {/*</Grid>*/}
       {/*<div>*/}
         {/*<Router>*/}
-          <Button variant="contained" size="small" onClick={handleClick} component={RouterLink} to={`/search/${searchItem}`}>Search</Button>
+      {/*<Grid item md={4}>*/}
+      <Box sx={{width: "10%", ml: "5%"}}>
+        <Button variant="contained" sx={{height: "100%", width: "100%"}} onClick={handleClick} component={RouterLink} to={`/search/${searchItem}`}>Search</Button>
+      </Box>
+      {/*</Grid>*/}
         {/*</Router>*/}
       {/*</div>*/}
       {/*{searchResult && <Typography variant="body2" color="textSecondary" align="center">*/}

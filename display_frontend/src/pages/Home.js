@@ -1,26 +1,26 @@
 import React from "react";
 import SearchBar from "../components/SearchBar";
 import Copyright from "../components/Copyright";
-import {Box, CssBaseline, Typography} from "@mui/material";
+import {CssBaseline, Grid, Typography} from "@mui/material";
 
 function Home(){
   return (
     <React.Fragment>
       <CssBaseline />
-      <Box sx={{margin: 'auto', height: "100vh"}}>
+      <Grid container sx={{margin: 'auto', height: "100vh", justifyContent: "center", alignItems: "center"}}>
         {/*<Test />*/}
-        <Box textAlign={"center"} pt={"25vh"}>
-          <Typography variant="h4">
+        <Grid item container md={12}  height={"25%"} alignContent={"flex-end"} justifyContent={"center"}>  {/*pt={"25vh"}*/}
+          <Typography variant="h4" textAlign={"center"}>
             YYDS - Scholar Search Engine
           </Typography>
-        </Box>
-        <Box height={"40vh"} pt={"5vh"} alignItems={"center"}>
+        </Grid>
+        <Grid item container md={12} height={"45%"} alignContent={"center"} justifyContent={"center"}>   {/*pt={"5vh"}*/}
           <SearchBar/>
-        </Box>
-        <Box pt={"15vh"}>
+        </Grid>
+        <Grid item container md={12} height={"30%"} alignContent={"flex-end"} justifyContent={"center"}>  {/*pt={"15vh"}*/}
           <Copyright />
-        </Box>
-      </Box>
+        </Grid>
+      </Grid>
     </React.Fragment>
   );
 }
