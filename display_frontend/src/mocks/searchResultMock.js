@@ -15,7 +15,7 @@ export default Mock.mock(/\/search\?key=(.*)/, "get", (options) => {
     Mock.mock({
       "totalNum": totalNum,
       [`authors|${totalNum}`]:
-        [
+        [     //TODO: Bug: automatically omit the '[]' when totalNum===1
           // AuthorMock(searchKey)
           {
             "key|+1": 1,  //TODO: just for test

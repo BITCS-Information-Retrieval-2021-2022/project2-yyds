@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Divider, Grid, Pagination, Stack} from "@mui/material";
-import "../mocks/searchResultMock"; //uncomment this line to use Mock //TODO: comment this line
+// import "../mocks/searchResultMock"; //uncomment this line to use Mock //TODO: comment this line
 import AuthorAbstract from "./AuthorAbstract";
 import {Column} from "@mui-treasury/components/flex";
 import config from "../config";

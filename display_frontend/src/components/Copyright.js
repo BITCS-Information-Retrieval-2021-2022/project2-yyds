@@ -6,7 +6,7 @@ import React from "react";
 
 function Copyright(){
   return (
-    <Box textAlign={"center"} py={1}>
+    <Box textAlign={"center"} py={4}>
       <Box py={0.5}>
         <Typography variant='body2' color='textSecondary'>
           Made with ❤️ in BIT

@@ -4,7 +4,7 @@ import Copyright from "../components/Copyright";
 import React, {useEffect, useState} from "react";
 import NavigationBar from "../components/NavigationBar";
 import axios from "axios";
-import "../mocks/authorProfileMock"; //uncomment this line to use Mock //TODO: comment this line
+// import "../mocks/authorProfileMock"; //uncomment this line to use Mock //TODO: comment this line
 import AuthorAbstract from "../components/AuthorAbstract";
 import PaperAbstract from "../components/PaperAbstract";
 import {Column, Item, Row} from "@mui-treasury/components/flex";
