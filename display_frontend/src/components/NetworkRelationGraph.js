@@ -80,13 +80,16 @@ function NetworkRelationGraph (props) {
   });
 
   const option = {
-    // title: {
-    //   text: 'Les Miserables',
-    //   subtext: 'Default layout',
-    //   top: 'bottom',
-    //   left: 'right'
-    // },
-    tooltip: {},
+    title: {
+      text: 'Network Relation Graph',
+      subtext: 'Use copaperCount as criterion',
+      top: 'top',
+      left: 'left'
+    },
+    tooltip: {
+      // trigger: 'item',   //'axis'
+      // formatter: "{a} <br/>{b} : {c}%"   //{a} seems to be the first value of node
+    },
     // legend: [
     //   {
     //     // selectedMode: 'single',
@@ -110,6 +113,9 @@ function NetworkRelationGraph (props) {
           position: 'right',
           formatter: '{b}'
         },
+        labelLayout: {
+          hideOverlap: true
+        },
         lineStyle: {
           color: 'source',
           curveness: 0.3
@@ -126,7 +132,7 @@ function NetworkRelationGraph (props) {
 
   return <ReactECharts
     option={option}
-    style={{ height: '300px', width: '100%' }}
+    style={{ height: '200px', width: '100%' }}
   />;
 }
 
