@@ -1,13 +1,14 @@
 import {useState} from "react";
 import {Box, Button, TextField} from "@mui/material";
 // import axios from "axios";
-import {Link as RouterLink} from "react-router-dom";
+import {Link as RouterLink, useNavigate} from "react-router-dom";
 // import "../mocks/searchResultMock";
 
 
 function SearchBar(props){
   const [searchItem, setSearchItem] = useState(props.searchKey || '');
   // const [searchResult, setSearchResult] = useState();
+  const navigate = useNavigate();
 
   // async function getSearchResult(){
   //   try{
@@ -38,6 +39,11 @@ function SearchBar(props){
     // console.log('searchResult: ');
     // console.log(searchResult);
   }
+  const handleKeyPress = e => {
+    if(e.key === "Enter"){
+      navigate(`/search/${searchItem}`);
+    }
+  };
 
   return (
     <Box
@@ -50,7 +56,7 @@ function SearchBar(props){
       display="flex"
       justifyContent="center"
     >
-      <TextField id="outlined-basic" label="Search key" variant="outlined" value={searchItem} onChange={handleInputChange}/>
+      <TextField id="outlined-basic" label="Search key" variant="outlined" value={searchItem} onChange={handleInputChange} onKeyPress={handleKeyPress} />
       {/*<div>*/}
         {/*<Router>*/}
           <Button variant="contained" size="small" onClick={handleClick} component={RouterLink} to={`/search/${searchItem}`}>Search</Button>
