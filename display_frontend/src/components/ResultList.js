@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
 import {Divider, Grid, Pagination, Stack} from "@mui/material";
-// import "../mocks/searchResultMock"; //uncomment this line to use Mock //TODO: comment this line
+import "../mocks/searchResultMock"; //uncomment this line to use Mock //TODO: comment this line
 import AuthorAbstract from "./AuthorAbstract";
 import {Column} from "@mui-treasury/components/flex";
 import config from "../config";
@@ -88,10 +88,18 @@ function ResultList(props){
           </React.Fragment>
         ))}
       </Column>
-      <Grid item md={12} marginY={"20px"}>
+      <Grid item xs={12} marginY={"20px"}>
         <Stack spacing={2} marginX={"20vw"}>
           {/*<Typography>Page: {page}</Typography>*/}
-          <Pagination color={"primary"} variant={"outlined"} shape={"rounded"} sx={{margin: "auto"}} count={Math.ceil(totalNum/numsPerPage)} page={page} onChange={handlePageChange} />
+          <Pagination
+            color={"primary"}
+            variant={"outlined"}
+            shape={"rounded"}
+            sx={{margin: "auto"}}
+            count={Math.ceil(totalNum/numsPerPage)}
+            page={page}
+            onChange={handlePageChange}   //TODO: make the width of pagination adaptive
+          />
         </Stack>
       </Grid>
     </Grid>

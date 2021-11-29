@@ -1,10 +1,11 @@
 import React from "react";
-import {Avatar, Link} from "@mui/material";
+import {Avatar, Box, Link} from "@mui/material";
 import bengioPng from "../assets/bengio.png";
 import {Item, Row} from "@mui-treasury/components/flex";
 import {useDynamicAvatarStyles} from '@mui-treasury/styles/avatar/dynamic';
 import {useTrendInfoStyles} from '@mui-treasury/styles/info/trend';
 import {Info, InfoSubtitle, InfoTitle} from "@mui-treasury/components/info";
+import {ApartmentRounded, WorkOutlineRounded} from "@mui/icons-material";
 
 
 function AuthorAbstract(props) {
@@ -37,7 +38,7 @@ function AuthorAbstract(props) {
     <Row gap={2} p={2.5}>
       <Item alignSelf={"center"}>
         <Link href={`/author/${author["authorId"]}`}>
-          <Avatar variant={"rounded"} classes={avatarStyles} src={bengioPng} />
+          <Avatar variant={"rounded"} classes={avatarStyles} src={bengioPng} />   {/*TODO: use real image src*/}
         </Link>
       </Item>
       <Row wrap grow gap={0.5} minWidth={0}>
@@ -49,11 +50,13 @@ function AuthorAbstract(props) {
               </Link>
             </InfoTitle>
             <InfoSubtitle>
-              {author["academicTitle"]}
+              {/*<Box component={"span"} display={"flex"} alignItems={"center"}>*/}
+                <WorkOutlineRounded color={"secondary"} fontSize={"inherit"} /> {author["academicTitle"]}
+              {/*</Box>*/}
             </InfoSubtitle>
               {/*<br />*/}
             <InfoSubtitle>
-              {author["affiliations"] && author["affiliations"].join(", ")}
+              <ApartmentRounded color={"secondary"} fontSize={"inherit"}/> {author["affiliations"] && author["affiliations"].join(", ")}
             </InfoSubtitle>
           </Info>
         </Item>
