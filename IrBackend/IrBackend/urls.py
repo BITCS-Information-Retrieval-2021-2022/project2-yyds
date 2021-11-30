@@ -26,5 +26,5 @@ urlpatterns = [
     re_path('^api/author/$', views.author_view),
     # pass authorId through URL path
     path('api/author/<str:authorid>', views.author_view),
-    
+
 ]
