@@ -2,6 +2,8 @@ name: Flake8 lint
 
 on:
   push:
+    branches:
+      - '*'
     paths:
       - '**.py'
 
