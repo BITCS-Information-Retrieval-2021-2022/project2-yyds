@@ -1,5 +1,5 @@
 import React from "react";
-import {useLocation, useParams} from "react-router-dom";
+import {useLocation} from "react-router-dom";
 import {CssBaseline, Grid} from "@mui/material";
 import Copyright from "../components/Copyright";
 import ResultList from "../components/ResultList";

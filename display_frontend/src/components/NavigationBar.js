@@ -1,4 +1,4 @@
-import {Box, Grid, Link, Typography, createTheme, responsiveFontSizes, ThemeProvider} from "@mui/material";
+import {Grid, Link, Typography, createTheme, responsiveFontSizes, ThemeProvider} from "@mui/material";
 import SearchBar from "./SearchBar";
 import React from "react";
 

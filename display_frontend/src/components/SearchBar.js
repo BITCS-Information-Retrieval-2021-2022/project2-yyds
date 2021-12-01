@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {Box, Button, TextField} from "@mui/material";
 // import axios from "axios";
-import {Link as RouterLink, useNavigate} from "react-router-dom";
+// import {Link as RouterLink, useNavigate} from "react-router-dom";
 import {SearchRounded} from "@mui/icons-material";
 // import "../mocks/searchResultMock";
 
@@ -40,7 +40,7 @@ import {SearchRounded} from "@mui/icons-material";
 function SearchBar(props){
   const [searchItem, setSearchItem] = useState(props.searchKey || '');
   // const [searchResult, setSearchResult] = useState();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // async function getSearchResult(){
   //   try{

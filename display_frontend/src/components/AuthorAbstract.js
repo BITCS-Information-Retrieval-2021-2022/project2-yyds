@@ -1,5 +1,5 @@
 import React from "react";
-import {Avatar, Box, Link} from "@mui/material";
+import {Avatar, Link} from "@mui/material";
 import bengioPng from "../assets/bengio.png";
 import {Item, Row} from "@mui-treasury/components/flex";
 import {useDynamicAvatarStyles} from '@mui-treasury/styles/avatar/dynamic';
