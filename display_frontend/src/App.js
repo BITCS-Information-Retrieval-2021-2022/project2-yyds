@@ -11,6 +11,7 @@ function App() {    //TODO: 404 page
     <Router>
       <Routes>
         <Route path="/" element={<Home />} exact/>
+        <Route path="/index.html" element={<Home />} />
         <Route path="/search" element={<SearchResult />} />
         <Route path="/author/:authorId" element={<AuthorProfile />} />
       </Routes>
