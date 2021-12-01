@@ -1,14 +1,19 @@
 import React from "react";
-import {useParams} from "react-router-dom";
+import {useLocation, useParams} from "react-router-dom";
 import {CssBaseline, Grid} from "@mui/material";
 import Copyright from "../components/Copyright";
 import ResultList from "../components/ResultList";
 // import SearchBar from "../components/SearchBar";
 import NavigationBar from "../components/NavigationBar";
+import qs from "qs";
 
 
 function SearchResult(){
-  let {searchKey} = useParams();
+  // let {searchKey} = useParams();
+  // let searchKey = props.location.query.searchKey;    //no longer exist in react-router > v4
+  let location = useLocation();
+  let {searchKey} = qs.parse(location.search, { ignoreQueryPrefix: true});
+
   return (
     <React.Fragment>
       <CssBaseline />
