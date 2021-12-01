@@ -1,9 +1,10 @@
 // import logo from './logo.svg';
 import './App.css';
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route, Navigate} from "react-router-dom";
 import Home from "./pages/Home";
 import SearchResult from "./pages/SearchResult";
 import AuthorProfile from "./pages/AuthorProfile";
+import Error from "./pages/Error";
 
 
 function App() {    //TODO: 404 page
@@ -14,6 +15,8 @@ function App() {    //TODO: 404 page
         <Route path="/index.html" element={<Home />} />
         <Route path="/search" element={<SearchResult />} />
         <Route path="/author/:authorId" element={<AuthorProfile />} />
+        <Route path="/error" element={<Error />} />
+        <Route path="*" element={<Navigate to="/error" />} />
       </Routes>
     </Router>
   );
