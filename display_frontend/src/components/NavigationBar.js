@@ -2,7 +2,7 @@ import {Grid, Link, Typography, createTheme, responsiveFontSizes, ThemeProvider}
 import SearchBar from "./SearchBar";
 import React from "react";
 
-function NavigationBar(props) {
+const NavigationBar = React.forwardRef((props, ref) => {
   let theme = createTheme();
   theme = responsiveFontSizes(theme);
 
@@ -23,6 +23,7 @@ function NavigationBar(props) {
       // borderBottomLeftRadius={4}
       // borderBottomRightRadius={4}
       boxShadow={'0 0 8px 0 #BDC9D7'}
+      ref={ref}
     >
       <Grid
         item
@@ -60,6 +61,6 @@ function NavigationBar(props) {
       </Grid>
     </Grid>
   );
-}
+});
 
 export default NavigationBar;

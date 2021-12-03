@@ -41,7 +41,7 @@ function ResultList(props){
     setPage(value);
     let topOffset = authorListRef.current.getBoundingClientRect().top;
     // console.log(authorListRef.current.getBoundingClientRect());
-    window.scrollBy(0, topOffset-80);
+    window.scrollBy(0, topOffset-props.navBarHeight);
   };
 
   return (

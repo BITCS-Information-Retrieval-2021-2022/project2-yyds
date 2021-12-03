@@ -20,6 +20,8 @@ function AuthorProfile(){
   const paperList = authorProfile && authorProfile["papers"];  //TODO: "xxx &&" is important!
   const paperNumPerPage = 10;
   const paperListRef = useRef();
+  const navBarRef = useRef();
+  const [navBarHeight, setNavBarHeight] = useState(0);
 
   useEffect(() => {
     const getAuthorProfile = async function (){
@@ -39,6 +41,10 @@ function AuthorProfile(){
 
   console.log(authorProfile);
 
+  useEffect(() => {
+    setNavBarHeight(navBarRef.current.clientHeight);
+  }, []);
+
   const handlePageChange = (event, value) => {
     setPage(value);
     // console.log(paperListRef);
@@ -46,7 +52,7 @@ function AuthorProfile(){
     let topOffset = paperListRef.current.getBoundingClientRect().top;
     // let topOffset = paperListRef.current.offsetTop;
     // console.log(topOffset);
-    window.scrollBy(0, topOffset-80);
+    window.scrollBy(0, topOffset-navBarHeight);
     // window.scrollTo({top: topOffset});
   };
 
@@ -61,10 +67,10 @@ function AuthorProfile(){
       {/*<ResultList />*/}
       {/*{props.params.searchKey}*/}
       <Grid item xs={12}>
-        <NavigationBar searchKey={""}/>
+        <NavigationBar searchKey={""} ref={navBarRef}/>
       </Grid>
       {/*{authorId}*/}
-      <Grid item xs={12} marginX={"2.5%"} marginTop={"80px"}>
+      <Grid item xs={12} marginX={"2.5%"} marginTop={navBarHeight+"px"}>
         {/*{console.log(authorProfile)}*/}
         <Grid container>
           <Column p={0} gap={0} marginY={"2vh"} marginX={"auto"} sx={{
