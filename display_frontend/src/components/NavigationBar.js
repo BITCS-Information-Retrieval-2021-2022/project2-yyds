@@ -3,7 +3,15 @@ import SearchBar from "./SearchBar";
 import React from "react";
 
 const NavigationBar = React.forwardRef((props, ref) => {
-  let theme = createTheme();
+  let theme = createTheme({
+    typography: {
+      body1: {
+        '@media (max-width:584px)': {
+          fontSize: "0.7rem"
+        }
+      }
+    }
+  });
   theme = responsiveFontSizes(theme);
 
   return (
