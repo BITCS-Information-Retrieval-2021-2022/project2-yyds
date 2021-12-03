@@ -1,9 +1,17 @@
-import {Box, Grid, Link, Typography, createTheme, responsiveFontSizes, ThemeProvider} from "@mui/material";
+import {Grid, Link, Typography, createTheme, responsiveFontSizes, ThemeProvider} from "@mui/material";
 import SearchBar from "./SearchBar";
 import React from "react";
 
-function NavigationBar(props) {
-  let theme = createTheme();
+const NavigationBar = React.forwardRef((props, ref) => {
+  let theme = createTheme({
+    typography: {
+      body1: {
+        '@media (max-width:584px)': {
+          fontSize: "0.7rem"
+        }
+      }
+    }
+  });
   theme = responsiveFontSizes(theme);
 
   return (
@@ -23,6 +31,7 @@ function NavigationBar(props) {
       // borderBottomLeftRadius={4}
       // borderBottomRightRadius={4}
       boxShadow={'0 0 8px 0 #BDC9D7'}
+      ref={ref}
     >
       <Grid
         item
@@ -60,6 +69,6 @@ function NavigationBar(props) {
       </Grid>
     </Grid>
   );
-}
+});
 
 export default NavigationBar;

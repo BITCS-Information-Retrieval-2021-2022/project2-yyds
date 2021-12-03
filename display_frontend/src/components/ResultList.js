@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import axios from "axios";
-import {Divider, Grid, Pagination, Stack} from "@mui/material";
+import {Divider, Grid, Pagination, Stack, useMediaQuery} from "@mui/material";
 // import "../mocks/searchResultMock"; //uncomment this line to use Mock //TODO: comment this line
 import AuthorAbstract from "./AuthorAbstract";
 import {Column} from "@mui-treasury/components/flex";
@@ -13,6 +13,8 @@ function ResultList(props){
   const totalNum = searchResult["totalNum"];
   const authorList = searchResult["authors"];
   const numsPerPage = 10;
+  const authorListRef = useRef();
+  const matches = useMediaQuery("(max-width:760px)");
 
   useEffect(() => {
     const getSearchResult = async function () {
@@ -33,11 +35,14 @@ function ResultList(props){
     // console.log(searchResult);
   }, [props.searchKey]);
 
-  console.log(searchResult);
-  console.log(props.searchKey);
+  // console.log(searchResult);
+  // console.log(props.searchKey);
 
   const handlePageChange = (event, value) => {
     setPage(value);
+    let topOffset = authorListRef.current.getBoundingClientRect().top;
+    // console.log(authorListRef.current.getBoundingClientRect());
+    window.scrollBy(0, topOffset-props.navBarHeight);
   };
 
   return (
@@ -70,7 +75,7 @@ function ResultList(props){
     //     </Stack>
     //   </Grid>
     // </Grid>
-    <Grid container>
+    <Grid container ref={authorListRef}>
       <Column p={0} gap={0} marginY={"2vh"} marginX={"auto"} sx={{
         width: '90%',
         borderRadius: 16,
@@ -98,7 +103,9 @@ function ResultList(props){
             sx={{margin: "auto"}}
             count={Math.ceil(totalNum/numsPerPage)}
             page={page}
-            onChange={handlePageChange}   //TODO: make the width of pagination adaptive
+            onChange={handlePageChange}
+            boundaryCount={matches?0:2}
+            siblingCount={matches?0:1}
           />
         </Stack>
       </Grid>

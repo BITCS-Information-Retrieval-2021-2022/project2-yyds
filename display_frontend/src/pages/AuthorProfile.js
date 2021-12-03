@@ -1,7 +1,7 @@
 import {useParams} from "react-router-dom";
 import {Box, CssBaseline, Divider, Grid, Pagination, Stack} from "@mui/material";
 import Copyright from "../components/Copyright";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import NavigationBar from "../components/NavigationBar";
 import axios from "axios";
 // import "../mocks/authorProfileMock"; //uncomment this line to use Mock //TODO: comment this line
@@ -19,6 +19,9 @@ function AuthorProfile(){
   const paperNum = authorProfile && authorProfile["paperCount"];
   const paperList = authorProfile && authorProfile["papers"];  //TODO: "xxx &&" is important!
   const paperNumPerPage = 10;
+  const paperListRef = useRef();
+  const navBarRef = useRef();
+  const [navBarHeight, setNavBarHeight] = useState(0);
 
   useEffect(() => {
     const getAuthorProfile = async function (){
@@ -36,10 +39,21 @@ function AuthorProfile(){
     getAuthorProfile();
   }, [authorId]);
 
-  console.log(authorProfile);
+  // console.log(authorProfile);
+
+  useEffect(() => {
+    setNavBarHeight(navBarRef.current.clientHeight);
+  }, []);
 
   const handlePageChange = (event, value) => {
     setPage(value);
+    // console.log(paperListRef);
+    // console.log(paperListRef.current.getBoundingClientRect());
+    let topOffset = paperListRef.current.getBoundingClientRect().top;
+    // let topOffset = paperListRef.current.offsetTop;
+    // console.log(topOffset);
+    window.scrollBy(0, topOffset-navBarHeight);
+    // window.scrollTo({top: topOffset});
   };
 
   return (
@@ -53,10 +67,10 @@ function AuthorProfile(){
       {/*<ResultList />*/}
       {/*{props.params.searchKey}*/}
       <Grid item xs={12}>
-        <NavigationBar searchKey={""}/>
+        <NavigationBar searchKey={""} ref={navBarRef}/>
       </Grid>
       {/*{authorId}*/}
-      <Grid item xs={12} marginX={"2.5%"} marginTop={"80px"}>
+      <Grid item xs={12} marginX={"2.5%"} marginTop={navBarHeight+"px"}>
         {/*{console.log(authorProfile)}*/}
         <Grid container>
           <Column p={0} gap={0} marginY={"2vh"} marginX={"auto"} sx={{
@@ -76,12 +90,12 @@ function AuthorProfile(){
           boxShadow: '0 8px 16px 0 #BDC9D7',
           padding: '1%'}}
         >
-          {/*{"Network graph."}  /!*TODO: graph*!/*/}
+          {/*{"Network graph."}*/}
           {authorProfile && <NetworkRelationGraph author={authorProfile}/>}
         </Box>
       </Grid>
       <Grid item xs={12} marginX={"2.5%"}>
-        <Grid container>
+        <Grid container ref={paperListRef}>
           <Column p={0} gap={0} marginY={"2vh"} marginX={"auto"} sx={{
             width: '90%',
             borderRadius: 16,
