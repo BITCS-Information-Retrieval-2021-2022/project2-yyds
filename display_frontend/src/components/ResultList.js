@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import axios from "axios";
 import {Divider, Grid, Pagination, Stack} from "@mui/material";
 // import "../mocks/searchResultMock"; //uncomment this line to use Mock //TODO: comment this line
@@ -13,6 +13,7 @@ function ResultList(props){
   const totalNum = searchResult["totalNum"];
   const authorList = searchResult["authors"];
   const numsPerPage = 10;
+  const authorListRef = useRef();
 
   useEffect(() => {
     const getSearchResult = async function () {
@@ -38,6 +39,9 @@ function ResultList(props){
 
   const handlePageChange = (event, value) => {
     setPage(value);
+    let topOffset = authorListRef.current.getBoundingClientRect().top;
+    // console.log(authorListRef.current.getBoundingClientRect());
+    window.scrollBy(0, topOffset-80);
   };
 
   return (
@@ -70,7 +74,7 @@ function ResultList(props){
     //     </Stack>
     //   </Grid>
     // </Grid>
-    <Grid container>
+    <Grid container ref={authorListRef}>
       <Column p={0} gap={0} marginY={"2vh"} marginX={"auto"} sx={{
         width: '90%',
         borderRadius: 16,

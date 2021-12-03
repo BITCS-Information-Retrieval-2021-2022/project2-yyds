@@ -1,7 +1,7 @@
 import {useParams} from "react-router-dom";
 import {Box, CssBaseline, Divider, Grid, Pagination, Stack} from "@mui/material";
 import Copyright from "../components/Copyright";
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import NavigationBar from "../components/NavigationBar";
 import axios from "axios";
 // import "../mocks/authorProfileMock"; //uncomment this line to use Mock //TODO: comment this line
@@ -19,6 +19,7 @@ function AuthorProfile(){
   const paperNum = authorProfile && authorProfile["paperCount"];
   const paperList = authorProfile && authorProfile["papers"];  //TODO: "xxx &&" is important!
   const paperNumPerPage = 10;
+  const paperListRef = useRef();
 
   useEffect(() => {
     const getAuthorProfile = async function (){
@@ -40,6 +41,13 @@ function AuthorProfile(){
 
   const handlePageChange = (event, value) => {
     setPage(value);
+    // console.log(paperListRef);
+    // console.log(paperListRef.current.getBoundingClientRect());
+    let topOffset = paperListRef.current.getBoundingClientRect().top;
+    // let topOffset = paperListRef.current.offsetTop;
+    // console.log(topOffset);
+    window.scrollBy(0, topOffset-80);
+    // window.scrollTo({top: topOffset});
   };
 
   return (
@@ -81,7 +89,7 @@ function AuthorProfile(){
         </Box>
       </Grid>
       <Grid item xs={12} marginX={"2.5%"}>
-        <Grid container>
+        <Grid container ref={paperListRef}>
           <Column p={0} gap={0} marginY={"2vh"} marginX={"auto"} sx={{
             width: '90%',
             borderRadius: 16,
