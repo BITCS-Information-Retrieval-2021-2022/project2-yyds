@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import axios from "axios";
-import {Divider, Grid, Pagination, Stack} from "@mui/material";
+import {Divider, Grid, Pagination, Stack, useMediaQuery} from "@mui/material";
 // import "../mocks/searchResultMock"; //uncomment this line to use Mock //TODO: comment this line
 import AuthorAbstract from "./AuthorAbstract";
 import {Column} from "@mui-treasury/components/flex";
@@ -14,6 +14,7 @@ function ResultList(props){
   const authorList = searchResult["authors"];
   const numsPerPage = 10;
   const authorListRef = useRef();
+  const matches = useMediaQuery("(max-width:760px)");
 
   useEffect(() => {
     const getSearchResult = async function () {
@@ -103,6 +104,8 @@ function ResultList(props){
             count={Math.ceil(totalNum/numsPerPage)}
             page={page}
             onChange={handlePageChange}   //TODO: make the width of pagination adaptive
+            boundaryCount={matches?0:2}
+            siblingCount={matches?0:1}
           />
         </Stack>
       </Grid>
