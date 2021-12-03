@@ -39,7 +39,7 @@ function AuthorProfile(){
     getAuthorProfile();
   }, [authorId]);
 
-  console.log(authorProfile);
+  // console.log(authorProfile);
 
   useEffect(() => {
     setNavBarHeight(navBarRef.current.clientHeight);

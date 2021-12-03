@@ -59,7 +59,7 @@ function SearchBar(props){
 
   const handleInputChange = e => setSearchItem(e.target.value);
   const handleClick = e => {
-    console.log(`searchItem: ${searchItem}`);
+    // console.log(`searchItem: ${searchItem}`);
     // e.preventDefault();
     // navigate(`/search/${searchItem}`);
     // getSearchResult();

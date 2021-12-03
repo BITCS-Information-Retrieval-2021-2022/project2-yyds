@@ -34,8 +34,8 @@ function ResultList(props){
     // console.log(searchResult);
   }, [props.searchKey]);
 
-  console.log(searchResult);
-  console.log(props.searchKey);
+  // console.log(searchResult);
+  // console.log(props.searchKey);
 
   const handlePageChange = (event, value) => {
     setPage(value);
