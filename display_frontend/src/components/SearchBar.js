@@ -120,7 +120,7 @@ function SearchBar(props){
       <Box sx={{width: "10%", ml: "5%"}}>   {/* ml is inside width */}
         <Button
           variant="contained"
-          startIcon={<SearchRounded />}
+          startIcon={<SearchRounded sx={{"@media (max-width:940px)": {display: "none"}}}/>}
           sx={{height: "100%", width: "100%"}}
           onClick={handleClick} 
           // component={RouterLink}
