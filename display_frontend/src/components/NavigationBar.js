@@ -1,4 +1,4 @@
-import {Grid, Link, Typography, createTheme, responsiveFontSizes, ThemeProvider} from "@mui/material";
+import {Grid, Link, Typography, createTheme, ThemeProvider} from "@mui/material";
 import SearchBar from "./SearchBar";
 import React from "react";
 
@@ -12,7 +12,7 @@ const NavigationBar = React.forwardRef((props, ref) => {
       }
     }
   });
-  theme = responsiveFontSizes(theme);
+  // theme = responsiveFontSizes(theme);
 
   return (
     <Grid
