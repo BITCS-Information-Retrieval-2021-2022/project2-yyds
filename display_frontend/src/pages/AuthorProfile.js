@@ -90,7 +90,7 @@ function AuthorProfile(){
           boxShadow: '0 8px 16px 0 #BDC9D7',
           padding: '1%'}}
         >
-          {/*{"Network graph."}  /!*TODO: graph*!/*/}
+          {/*{"Network graph."}*/}
           {authorProfile && <NetworkRelationGraph author={authorProfile}/>}
         </Box>
       </Grid>

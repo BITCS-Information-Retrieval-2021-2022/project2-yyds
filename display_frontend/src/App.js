@@ -7,7 +7,7 @@ import AuthorProfile from "./pages/AuthorProfile";
 import Error from "./pages/Error";
 
 
-function App() {    //TODO: 404 page
+function App() {
   return (
     <Router>
       <Routes>

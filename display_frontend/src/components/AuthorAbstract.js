@@ -1,6 +1,6 @@
 import React from "react";
 import {Avatar, Link} from "@mui/material";
-import bengioPng from "../assets/bengio.png";
+// import bengioPng from "../assets/bengio.png";
 import {Item, Row} from "@mui-treasury/components/flex";
 import {useDynamicAvatarStyles} from '@mui-treasury/styles/avatar/dynamic';
 import {useTrendInfoStyles} from '@mui-treasury/styles/info/trend';
@@ -38,7 +38,7 @@ function AuthorAbstract(props) {
     <Row gap={2} p={2.5}>
       <Item alignSelf={"center"}>
         <Link href={`/author/${author["authorId"]}`}>
-          <Avatar variant={"rounded"} classes={avatarStyles} src={bengioPng} />   {/*TODO: use real image src*/}
+          <Avatar variant={"rounded"} classes={avatarStyles} src={author["photoUrl"]} />
         </Link>
       </Item>
       <Row wrap grow gap={0.5} minWidth={0}>

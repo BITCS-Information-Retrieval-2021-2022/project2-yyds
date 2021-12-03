@@ -103,7 +103,7 @@ function ResultList(props){
             sx={{margin: "auto"}}
             count={Math.ceil(totalNum/numsPerPage)}
             page={page}
-            onChange={handlePageChange}   //TODO: make the width of pagination adaptive
+            onChange={handlePageChange}
             boundaryCount={matches?0:2}
             siblingCount={matches?0:1}
           />
