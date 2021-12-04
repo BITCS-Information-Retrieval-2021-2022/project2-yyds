@@ -1,18 +1,54 @@
-import {Grid, Link, Typography, createTheme, responsiveFontSizes, ThemeProvider} from "@mui/material";
+import {Grid, Link, Typography, createTheme, ThemeProvider} from "@mui/material";
 import SearchBar from "./SearchBar";
 import React from "react";
 
 const NavigationBar = React.forwardRef((props, ref) => {
-  let theme = createTheme({
+  // let theme = createTheme({
+  //   typography: {
+  //     h6: {
+  //       fontSize: "1rem",
+  //       '@media (max-width:584px)': {
+  //         fontSize: "0.7rem"
+  //       }
+  //     }
+  //   }
+  // });
+  // const theme = createTheme({
+  //   components: {
+  //     // Name of the component
+  //     MuiTypography: {
+  //       // defaultProps: {
+  //       //   fontSize: '1rem',
+  //       //   '@media (max-width:584px)': {
+  //       //     fontSize: "0.7rem"
+  //       //   }
+  //       // },
+  //       styleOverrides: {
+  //         // Name of the slot
+  //         root: {
+  //           // Some CSS
+  //           fontSize: '1rem',
+  //           '@media (max-width:584px)': {
+  //             fontSize: "0.7rem"
+  //           }
+  //         },
+  //       },
+  //     },
+  //   },
+  // });
+  const theme = createTheme({     //TODO: For god's sake, please use custom variants !!!
     typography: {
-      body1: {
+      navBarTitle: {
+        // color: 'red',
+        fontSize: '1rem',
         '@media (max-width:584px)': {
-          fontSize: "0.7rem"
+          fontSize: '0.7rem',
+          // lineHeight: 1.5,     //TODO: Please notice that line-height should be used on a 'p' element.
         }
       }
     }
   });
-  theme = responsiveFontSizes(theme);
+  // theme = responsiveFontSizes(theme);
 
   return (
     <Grid
@@ -50,11 +86,11 @@ const NavigationBar = React.forwardRef((props, ref) => {
         >
           <Link color="inherit" underline="none" href="/">
             <ThemeProvider theme={theme}>
-              <Typography variant="body1">
-                YYDS
-              </Typography>
-              <Typography variant="body1">
-                Scholar Search Engine
+            {/*  <CssBaseline />*/}
+              <Typography variant={"navBarTitle"} component={"p"}>  {/*TODO: For god's sake, please make the component
+                                                                        of 'Typography' be 'p'. It automatically changes
+                                                                        to 'span' once you use custom variants!*/}
+                YYDS<br/>Scholar Search Engine
               </Typography>
             </ThemeProvider>
           </Link>

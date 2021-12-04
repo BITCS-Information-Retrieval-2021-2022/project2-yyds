@@ -1,5 +1,5 @@
 import {useParams} from "react-router-dom";
-import {Box, CssBaseline, Divider, Grid, Pagination, Stack} from "@mui/material";
+import {Box, CssBaseline, Divider, Grid, Pagination, Stack, useMediaQuery} from "@mui/material";
 import Copyright from "../components/Copyright";
 import React, {useEffect, useRef, useState} from "react";
 import NavigationBar from "../components/NavigationBar";
@@ -22,6 +22,7 @@ function AuthorProfile(){
   const paperListRef = useRef();
   const navBarRef = useRef();
   const [navBarHeight, setNavBarHeight] = useState(0);
+  const matches = useMediaQuery("(max-width:760px)");
 
   useEffect(() => {
     const getAuthorProfile = async function (){
@@ -140,7 +141,17 @@ function AuthorProfile(){
         <Grid item xs={12} marginY={"20px"}>
           <Stack spacing={2} marginX={"20vw"}>
             {/*<Typography>Page: {page}</Typography>*/}
-            <Pagination color={"primary"} variant={"outlined"} shape={"rounded"} sx={{margin: "auto"}} count={Math.ceil(paperNum/paperNumPerPage)} page={page} onChange={handlePageChange} />
+            <Pagination
+              color={"primary"}
+              variant={"outlined"}
+              shape={"rounded"}
+              sx={{margin: "auto"}}
+              count={Math.ceil(paperNum/paperNumPerPage)}
+              page={page}
+              onChange={handlePageChange}
+              boundaryCount={matches?0:2}
+              siblingCount={matches?0:1}
+            />
           </Stack>
         </Grid>
       </Grid>
