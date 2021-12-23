@@ -24,7 +24,6 @@ urlpatterns = [
     path('api/search/', views.search_view),
     # pass authorId through query arguments
     re_path('^api/author/$', views.author_view),
-    # pass authorId through URL path
-    path('api/author/<str:authorid>', views.author_view),
-
+    # pass authorId through URL path is also okay~
+    path('api/author/<str:authorid>', views.author_view)
 ]
