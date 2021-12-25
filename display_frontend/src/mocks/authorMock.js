@@ -25,6 +25,7 @@ const AuthorMock = function (searchKey) {
       Random.title(1, 5)
     ],
   "paperCount": paperCount,
+  "realPaperCount": paperCount,
   "citationCount": Random.integer(1, 100),
   "hIndex": Random.integer(1, 20),
   "coAuthors|1-10":
