@@ -6,7 +6,7 @@ function NetworkRelationGraph (props) {
   const coAuthors = author["coAuthors"].sort((a, b) => (b.copaperCount - a.copaperCount));
   const coAuthorsNum = coAuthors.length;
   const radiusOrigin = 100;
-  const symbolSizeOrigin = 40;
+  const symbolSizeOrigin = 100;
   // coAuthor:
   // {
   //  "authorId": "123",
@@ -61,7 +61,11 @@ function NetworkRelationGraph (props) {
     node.id = index;
     node.category = 0;
     node.value = node.copaperCount;   //number in caption
-    node.symbolSize = (node.copaperCount / graph.nodes[0].copaperCount) * symbolSizeOrigin;  //decide the size
+    if(index === 0){
+      node.symbolSize = 20;
+    }else {
+      node.symbolSize = (node.copaperCount / graph.nodes[0].copaperCount) * symbolSizeOrigin;  //decide the size
+    }
     if(index === 0){
       //coordinate system:
       //
