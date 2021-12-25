@@ -80,7 +80,7 @@ function AuthorProfile(){
             boxShadow: '0 8px 16px 0 #BDC9D7',
             overflow: 'hidden'}}
           >
-            {authorProfile && <AuthorAbstract author={authorProfile} />}    {/*TODO: "xxx &&" is important!*/}
+            {authorProfile && <AuthorAbstract author={authorProfile} displayFieldsOfStudy={true}/>}    {/*TODO: "xxx &&" is important!*/}
           </Column>
         </Grid>
       </Grid>

@@ -51,7 +51,7 @@ function AuthorAbstract(props) {
             </InfoTitle>
             <InfoSubtitle>
               <Chip variant="outlined" color="info" size="small" label={`h-index: ${author["hIndex"]}`}/>{" "}
-              <Chip variant="outlined" color="info" size="small" label={`realPaperCount: ${author["realPaperCount"]}`}/>{" "}
+              <Chip variant="outlined" color="info" size="small" label={`paperCount: ${author["realPaperCount"]}`}/>{" "}
               <Chip variant="outlined" color="info" size="small" label={`citationCount: ${author["citationCount"]}`}/>
             </InfoSubtitle>
             <InfoSubtitle>
@@ -63,9 +63,11 @@ function AuthorAbstract(props) {
             <InfoSubtitle>
               <ApartmentRounded color={"secondary"} fontSize={"inherit"}/> {author["affiliations"] && author["affiliations"].join(", ")}
             </InfoSubtitle>
-            <InfoSubtitle>
-              <InterestsOutlined color={"secondary"} fontSize={"inherit"} /> {author["fieldsOfStudy"] && author["fieldsOfStudy"].join(", ")}
-            </InfoSubtitle>
+            {props.displayFieldsOfStudy ?
+              <InfoSubtitle>
+                <InterestsOutlined color={"secondary"} fontSize={"inherit"} /> {author["fieldsOfStudy"] && author["fieldsOfStudy"].join(", ")}
+              </InfoSubtitle>
+              : null}
           </Info>
         </Item>
       </Row>
