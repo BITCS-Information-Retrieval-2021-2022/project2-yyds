@@ -16,7 +16,7 @@ def hello_view(request):
 
 
 def search_view(request):
-    url = 'http://82.156.177.164:9939/authors/_search?'
+    url = 'http://82.156.177.164:9939/mergeauthors/_search?'
     headers = {'Content-Type': 'application/json'}
     if request.method == 'GET':
         key = request.GET.get('key', '')
@@ -32,12 +32,10 @@ def search_view(request):
         {'match': {'name': '%s' % key}},
         {'match': {'academicTitle': '%s' % key}},
         {'match': {'affiliations': '%s' % key}},
-        {'match': {'papers.fieldsOfStudy': '%s' % key}},
-        {'match': {'papers.title': '%s' % key}},
+        {'match': {'papers': '%s' % key}},
     ]}}
-    # actully we still need fieldsOfStudy!
     args['_source'] = {'exclude': ['coAuthors', 'papers']}
-    # query['sort'] = [{'paperCount':'desc'}]
+    args['size'] = 200
     payload = json.dumps(args)
     r = requests.post(url, headers=headers, data=payload)
     if r.status_code != 200:
@@ -49,9 +47,11 @@ def search_view(request):
     rdata['authors'] = list()
     for dt in details:
         item = dt['_source']
-        item["academicTitle"] = "placeholder"
-        item["affiliations"] = ["placeholder1", "placeholder2"]
-        item["photoUrl"] = "http://avatarcdn.aminer.cn/upload/avatar/447/748/516/560704c045cedb33969cfaf4.jpeg"
+        if 'academicTitle' not in item:
+            item['academicTitle'] = "🎅"
+        if 'affiliations' not in item:
+            item['affiliations'] = ["🎈", "🎄", "🤶"]
+        item['photoUrl'] = "http://82.156.177.164/api/static/chrismas.jpg"
         rdata['authors'].append(item)
     return HttpResponse(json.dumps(rdata), content_type='application/json')
 
@@ -69,7 +69,9 @@ def author_view(request, authorid=''):
     if authorid == '':
         return HttpResponse(status=404)
 
-    url = 'http://82.156.177.164:9939/authors/_search?'
+    url = 'http://82.156.177.164:9939/mergeauthors/_search?'
+    url_paper1 = 'http://82.156.177.164:9939/paper_col/_search?'
+    url_paper2 = 'http://82.156.177.164:9939/mergepaper/_search?'
     headers = {'Content-Type': 'application/json'}
     args = dict()
     args['query'] = {'match': {'authorId': '%s' % authorid}}
@@ -82,24 +84,49 @@ def author_view(request, authorid=''):
     if re_from_es['hits']['total']['value'] != 1:
         return HttpResponse(status=404)
     rdata = re_from_es['hits']['hits'][0]['_source']
-    rdata['fieldsOfStudy'] = ['placeholder3', 'placeholder4']
-    rdata["academicTitle"] = "placeholder"
-    rdata["affiliations"] = ["placeholder1", "placeholder2"]
-    rdata["photoUrl"] = "http://avatarcdn.aminer.cn/upload/avatar/447/748/516/560704c045cedb33969cfaf4.jpeg"
-    # process papers to get coauthors
-    coauthor_dict = dict()
-    for paper in rdata["papers"]:
-        for author in paper["authors"]:
-            if author["name"] in coauthor_dict:
-                coauthor_dict[author["name"]].copaperCount += 1
-            else:
-                coauthor_dict[author["name"]] = coAuthorItem(
-                    author["authorId"], author["name"])
-        paper["fieldsOfStudy"] = ['placeholder4', 'placeholder5']
-
-    rdata["coAuthors"] = list()
-    for caitem in coauthor_dict.values():
-        tmpitem = {"authorId": caitem.authorId, "name": caitem.name,
-                   "copaperCount": caitem.copaperCount}
-        rdata["coAuthors"].append(tmpitem)
+    if 'academicTitle' not in rdata:
+        rdata["academicTitle"] = "🎅"
+    if 'affiliations' not in rdata:
+        rdata['affiliations'] = ["🎈", "🎄", "🤶"]
+    rdata["photoUrl"] = "http://82.156.177.164/api/static/chrismas.jpg"
+    papers_list = list()
+    fields_of_study = dict()
+    rdata['realPaperCount'] = rdata['paperCount']
+    rdata['paperCount'] = 0
+    for paper_id in rdata["papers"]:
+        args['query'] = {'match': {'paperId': '%s' % paper_id}}
+        payload = json.dumps(args)
+        r = requests.post(url_paper1, headers=headers, data=payload)
+        re_from_es = json.loads(r.text)
+        if re_from_es['hits']['total']['value'] != 1:
+            args['query'] = {'match': {'_id': '%s' % paper_id}}
+            payload = json.dumps(args)
+            r = requests.post(url_paper2, headers=headers, data=payload)
+            re_from_es = json.loads(r.text)
+            if re_from_es['hits']['total']['value'] != 1:
+                print("NO REC %s" % paper_id)
+                continue
+        rdata['paperCount'] += 1
+        paperinfo = re_from_es['hits']['hits'][0]['_source']
+        if 'fieldsOfStudy' in paperinfo:
+            for field in paperinfo['fieldOfStudy']:
+                if field in fields_of_study:
+                    fields_of_study[field] += 1
+                else:
+                    fields_of_study[field] = 1
+        else:
+            paperinfo['fieldsOfStudy'] = ["🔔", "🎁", "🧦"]
+        if 'venue' not in paperinfo:
+            paperinfo['venue'] = "🎄"
+        else:
+            paperinfo['venue'] = paperinfo['venue'].capitalize()
+        papers_list.append(paperinfo)
+    rdata['papers'] = papers_list
+    rdata['fieldsOfStudy'] = list()
+    if len(fields_of_study) == 0:
+        rdata['fieldsOfStudy'] = ["🔔", "🎁", "🧦"]
+    else:
+        for tp in sorted(fields_of_study.items(),
+                         key=lambda kv: (kv[1], kv[0]), reverse=True)[0:4]:
+            rdata['fieldsOfStudy'].append(tp[0])
     return HttpResponse(json.dumps(rdata), content_type='application/json')
