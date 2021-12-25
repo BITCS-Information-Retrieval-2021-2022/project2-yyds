@@ -130,7 +130,7 @@ class AminerPipeline:
                             upsert=True)
 
         try:
-            self.papers.insert_many(papers)
+            self.papers.insert_many(paper_infos)
         except pymongo.errors.BulkWriteError:
             pass
 
