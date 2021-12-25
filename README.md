@@ -1,9 +1,15 @@
 # 1 项目内容
 ## 1.1 项目题目
-(抄题)
+学者检索引擎
 
 ## 1.2 项目介绍
-(截图，功能)
+本项目主要任务是搭建一个学者检索网站，可以通过作者名、论文、机构等信息进行学者检索，并能区分重名作者，合并相同作者（利用机构、著作等信息）。本项目主要包括爬虫模块、检索模块和展示模块三部分。
+
+- 开始界面：
+![image](IrBackend/static/2 (2).png)
+
+- 搜索界面：
+![image](IrBackend/static/2 (1).png)
 
 ## 1.3 项目特色
 
@@ -26,6 +32,15 @@
 项目致力于为用户打造完善而流畅的用户体验。
 
 # 2 小组成员及分工
+
+|       姓名      | 分工 |
+| :-----------: | :----: |
+|    张宇航   | 前端 |
+|   罗张挥弦  | 后端 |
+|    国博凯   | Semantic爬虫 |
+|     陈宝    | Aminer爬虫 |
+|    林金坤   | 作者合并 |
+|    侯嘉璐   | 检索模块 |
 
 # 3 接口
 ## 3.1 字段定义
@@ -162,11 +177,134 @@
 
 # 4 模块简介
 ## 4.1 爬虫模块
-(简述原理)
+
+爬虫模块基于`scrapy`搭建，使用`mongodb`保存爬取到的数据。
+
+代码结构如下:
+
+```plain
+├─crawlers
+│  ├─aminer
+│  │  │  scrapy.cfg
+│  │  │
+│  │  └─aminer
+│  │      │  items.py
+│  │      │  pipelines.py
+│  │      │  settings.py
+│  │      │  __init__.py
+│  │      │
+│  │      └─spiders
+│  │              aminer.py
+│  │              aminer2.py
+│  │              __init__.py
+│  │
+│  └─semantic_scholar
+│      │  scrapy.cfg
+│      │
+│      └─tutorial
+│          │  items.py
+│          │  middlewares.py
+│          │  pipelines.py
+│          │  settings.py
+│          │
+│          └─spiders
+│                  semanticauthor.py
+│                  __init__.py
+│
+└─data_processing
+        test.ipynb
+        test1.ipynb
+        test2.ipynb
+```
+
+### 4.1.1 Aminer爬虫
+
+aminer爬虫分为两个部分：
+
+1. 第一部分：使用通配符`*`向搜索接口根据h指数从高往低依次进行查询，并逐步添加过滤条件，最终能爬取到350+w作者。
+2. 第二部分：利用第一部分爬取到的作者的共同作者和论文的共同作者，得到未爬取过的作者id集合，对这些作者id进行爬取，并更新作者id集合
+
+aminer上共计爬取了1,184,050条作者数据，字段覆盖率如下：
+
+|       字段    |  数量 | 覆盖率（%） |
+| :-----------: | :-----: | :----: |
+|    authorId   | 1184050 | 100.00 |
+|      name     | 1184050 | 100.00 |
+|    photoUrl   | 107878  |  9.11  |
+| academicTitle | 112663  |  9.52  |
+|  affiliations | 1101369 |  93.02 |
+|   paperCount  | 1184050 | 100.00 |
+| citationCount | 1184050 | 100.00 |
+|     hIndex    | 1184050 | 100.00 |
+|   coAuthors   | 1183756 |  99.98 |
+| fieldsOfStudy |0| 0 |
+|     papers    | 1183622 |  99.96 |
+
+aminer上共计爬取了14,855,785篇论文数据，字段覆盖率如下：
+
+|       字段 |  数量   | 覆盖率（%） |
+| :-----------: |:----:| :----: |
+|     paperId     |14855785|  100 |
+|      url      |2284942|  15.38 |
+|     title     |14702179|  98.97 |
+|     venue     |12684583|  85.38 |
+|      year     |14855785| 100.00 |
+| citationCount |14855785| 100.00 |
+|    authors    |14855784| 100.00 |
+|    fieldsOfStudy    |0| 0 |
+
+### 4.1.2 Semantic Scholar 爬虫
+
+因为semantic scholar 的作者id是有规律的整数，我们直接枚举作者id并爬取数据。我们使用了代理ip防止ip被禁，应对semantic scholar对请求速度的限制。
+
+semantic scholar 上共计爬取了70,299条作者数据，字段覆盖率如下：
+
+|       字段   |数量   | 覆盖率（%） |
+| :-----------: |:----:| :----: |
+|    authorId   |70299| 100.00 |
+|      name     |70299| 100.00 |
+|    photoUrl   | 0  |  0 |
+| academicTitle | 0  |  0  |
+|  affiliations |541| 0.77 |
+|   paperCount  |70299 |100.00 |
+| citationCount |70299| 100.00 |
+|     hIndex    | 70299|100.00 |
+|   coAuthors   | 68832| 97.91 |
+| fieldsOfStudy |69399 | 98.72 |
+|     papers    | 69847|99.36 |
+
+semantic scholar 上共计爬取了2,887,389篇论文，字段覆盖率如下：
+
+|       字段 |  数量   | 覆盖率（%） |
+| :-----------: |:----:| :----: |
+|     paperId     |2887389|  100 |
+|      url      |2887389|  100.00 |
+|     title     |2887389|  100.00 |
+|     venue     |0|  0 |
+|      year     |2878381|99.69 |
+| citationCount |2887389| 100.00 |
+|    authors    |2887389| 100.00 |
+|    fieldsOfStudy    |2707645| 93.77 |
 
 ## 4.2 检索模块
-(简述原理)
 
+将mongodb上的作者和论文信息同步到[Elasticsearch](https://www.elastic.co)上进行搜索，有利于提高搜索效率。
+
+Elsaticsearch的配置文件如下：
+```yml
+node.name: node-1
+network.host: 0.0.0.0
+http.port: 9200
+cluster.initial_master_nodes: ["node-1"]
+```
+运行
+* Window直接点击bin目录下的`elasticsearch.bat`运行。
+* Linux在bin目录执行`./elasticsearch`运行
+
+通过访问本地9200端口判断是否运行成功：
+```
+curl localhost:9200
+```
 ## 4.3 网站模块
 ### 4.3.1 前端
 
@@ -239,7 +377,64 @@
 
 # 5 项目部署
 ## 5.1 数据库
-(依赖，配置，运行方法)
+### 5.1.1 依赖项
+依赖如下：
+
+  |  依赖项  |  版本  |
+  | :------: | :----: |
+  |  MongoDB  |  5.0.3  |
+  | Elasticsearch | 7.15.1 |
+  |  Monstache   | 6.7.7 |
+### 5.1.2 配置
+配置文件mongo.config如下:
+```config
+dbpath = D:\apps\mongodb-5.0.3\data
+logpath = D:\apps\mongodb-5.0.3\logs\mongo.log
+port = 27017
+bind_ip = 127.0.0.1
+replSet = rs0
+```
+MongoDB同步到Elasticsearch，同步工具选用[monstache](https://github.com/rwynn/monstache/releases)。monstache配置文件config.toml如下：
+
+```toml
+mongo-url = "mongodb://127.0.0.1:27017"
+elasticsearch-urls = ["http://localhost:9200"]
+elasticsearch-max-conns = 4
+      
+direct-read-namespaces = ["semantic.author_col"]
+
+change-stream-namespaces = ["semantic.author_col"]
+#gzip = true
+dropped-collections = true
+
+# propogate dropped databases in MongoDB as index deletes in Elasticsearch
+dropped-databases = true
+
+resume = true #从上次同步的时间开始同步
+index-as-update = true
+verbose = true
+[logs]        #日志文件
+info = "D:\\IR\\windows-amd64\\info.log"
+warn = "D:\\IR\\windows-amd64\\wran.log"
+error = "D:\\IR\\windows-amd64\\error.log"
+trace = "D:\\IR\\windows-amd64\\trace.log"
+
+[[mapping]]
+namespace = "semantic.author_col"
+index = "author_col"
+```
+### 5.1.3 部署运行
+
+执行以下命令启动mongodb：
+```
+mongodb -f mongo.config
+```
+按照4.2启动elasticsearch后，启动monstache同步mongodb数据到elasticsearch中，同步命令：
+```
+monstache.exe -f D:\IR\windows-amd64\config.toml
+```
+在windows命令行输入`curl localhost:9200/_cat/indices?v`查看是否同步成功。
+
 
 ## 5.2 后端
 ### 5.2.1 依赖项
