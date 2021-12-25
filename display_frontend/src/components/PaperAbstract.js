@@ -3,7 +3,7 @@ import React from "react";
 import {Item, Row} from "@mui-treasury/components/flex";
 import {Info, InfoSubtitle, InfoTitle} from "@mui-treasury/components/info";
 import {useTrendInfoStyles} from "@mui-treasury/styles/info/trend";
-import {AttributionRounded, DateRangeRounded, InterestsOutlined} from "@mui/icons-material";
+import {AttributionRounded, DateRangeRounded, HomeOutlined, InterestsOutlined} from "@mui/icons-material";
 
 function PaperAbstract(props) {
   const paper = props.paper;
@@ -45,7 +45,10 @@ function PaperAbstract(props) {
             </InfoTitle>
             <InfoSubtitle>
               <DateRangeRounded color={"secondary"} fontSize={"inherit"} /> {paper["year"]} {'\u00A0'}
-              <InterestsOutlined color={"secondary"} fontSize={"inherit"} /> {paper["venue"]}
+              <HomeOutlined color={"secondary"} fontSize={"inherit"} /> {paper["venue"]}
+            </InfoSubtitle>
+            <InfoSubtitle>
+              <InterestsOutlined color={"secondary"} fontSize={"inherit"} /> {paper["fieldsOfStudy"] && paper["fieldsOfStudy"].join(", ")}
             </InfoSubtitle>
             {/*<br />*/}
             <InfoSubtitle>
