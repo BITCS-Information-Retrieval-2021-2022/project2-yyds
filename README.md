@@ -6,10 +6,10 @@
 本项目主要任务是搭建一个学者检索网站，可以通过作者名、论文、机构等信息进行学者检索，并能区分重名作者，合并相同作者（利用机构、著作等信息）。本项目主要包括爬虫模块、检索模块和展示模块三部分。
 
 - 开始界面：
-![image](IrBackend/static/2 (2).png)
+![1](IrBackend/static/1.png)
 
 - 搜索界面：
-![image](IrBackend/static/2 (1).png)
+![2](IrBackend/static/2.png)
 
 ## 1.3 项目特色
 
