@@ -1,6 +1,6 @@
 ## How to Deploy this project
 
-### step 1. Brontend
+### step 1. Frontend
 
 xxx
 
