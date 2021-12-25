@@ -11,6 +11,9 @@
 - 搜索界面：
 ![2](IrBackend/static/2.png)
 
+- 作者profile界面：
+![3](IrBackend/static/3.png)
+
 ## 1.3 项目特色
 
 ### 1.3.1 响应式前端设计
