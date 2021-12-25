@@ -1,11 +1,11 @@
 import React from "react";
-import {Avatar, Link} from "@mui/material";
+import {Avatar, Chip, Link} from "@mui/material";
 // import bengioPng from "../assets/bengio.png";
 import {Item, Row} from "@mui-treasury/components/flex";
 import {useDynamicAvatarStyles} from '@mui-treasury/styles/avatar/dynamic';
 import {useTrendInfoStyles} from '@mui-treasury/styles/info/trend';
 import {Info, InfoSubtitle, InfoTitle} from "@mui-treasury/components/info";
-import {ApartmentRounded, WorkOutlineRounded} from "@mui/icons-material";
+import {ApartmentRounded, InterestsOutlined, WorkOutlineRounded} from "@mui/icons-material";
 
 
 function AuthorAbstract(props) {
@@ -50,6 +50,11 @@ function AuthorAbstract(props) {
               </Link>
             </InfoTitle>
             <InfoSubtitle>
+              <Chip variant="outlined" color="info" size="small" label={`h-index: ${author["hIndex"]}`}/>{" "}
+              <Chip variant="outlined" color="info" size="small" label={`realPaperCount: ${author["realPaperCount"]}`}/>{" "}
+              <Chip variant="outlined" color="info" size="small" label={`citationCount: ${author["citationCount"]}`}/>
+            </InfoSubtitle>
+            <InfoSubtitle>
               {/*<Box component={"span"} display={"flex"} alignItems={"center"}>*/}
                 <WorkOutlineRounded color={"secondary"} fontSize={"inherit"} /> {author["academicTitle"]}
               {/*</Box>*/}
@@ -57,6 +62,9 @@ function AuthorAbstract(props) {
               {/*<br />*/}
             <InfoSubtitle>
               <ApartmentRounded color={"secondary"} fontSize={"inherit"}/> {author["affiliations"] && author["affiliations"].join(", ")}
+            </InfoSubtitle>
+            <InfoSubtitle>
+              <InterestsOutlined color={"secondary"} fontSize={"inherit"} /> {author["fieldsOfStudy"] && author["fieldsOfStudy"].join(", ")}
             </InfoSubtitle>
           </Info>
         </Item>
