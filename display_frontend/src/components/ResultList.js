@@ -89,7 +89,7 @@ function ResultList(props){
             <Divider variant={"middle"} sx={{bgcolor: '#d9e2ee', margin: "0 20px"}}/>
               : null
             }
-            <AuthorAbstract author={author} />
+            <AuthorAbstract author={author} displayFieldsOfStudy={false}/>
           </React.Fragment>
         ))}
       </Column>
