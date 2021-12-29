@@ -38,12 +38,12 @@
 
 |       姓名      | 分工 |
 | :-----------: | :----: |
-|    张宇航   | 前端 |
-|   罗张挥弦  | 后端 |
-|    国博凯   | Semantic爬虫 |
-|     陈宝    | Aminer爬虫 |
-|    林金坤   | 作者合并 |
-|    侯嘉璐   | 检索模块 |
+|    张**   | 前端 |
+|   罗**  | 后端 |
+|    国**   | Semantic爬虫 |
+|     陈*    | Aminer爬虫 |
+|    林**   | 作者合并 |
+|    侯**   | 检索模块 |
 
 # 3 接口
 ## 3.1 字段定义
@@ -99,7 +99,7 @@
 		{
 			"authorId": "1741101",
 			"name": "Oren Etzioni",
-			"photoUrl": "http://82.156.177.164/image/1741101.jpg",
+			"photoUrl": "http://*.*.*.*/image/1741101.jpg",
 			"academicTitle": "Professor",
 			"affiliations":
 			[
@@ -135,7 +135,7 @@
   {
 	"authorId": "1741101",
 	"name": "Oren Etzioni",
-	"photoUrl": "http://82.156.177.164/image/1741101.jpg",
+	"photoUrl": "http://*.*.*.*/image/1741101.jpg",
 	"academicTitle": "Professor",
 	"affiliations": [
 	  "Allen Institute for AI"
