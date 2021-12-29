@@ -16,7 +16,7 @@ def hello_view(request):
 
 
 def search_view(request):
-    url = 'http://82.156.177.164:9939/mergeauthors/_search?'
+    url = 'http://xx.xx.xx.xx:yyyy/mergeauthors/_search?'
     headers = {'Content-Type': 'application/json'}
     if request.method == 'GET':
         key = request.GET.get('key', '')
@@ -51,7 +51,7 @@ def search_view(request):
             item['academicTitle'] = "🎅"
         if 'affiliations' not in item:
             item['affiliations'] = ["🎈", "🎄", "🤶"]
-        item['photoUrl'] = "http://82.156.177.164/api/static/chrismas.jpg"
+        item['photoUrl'] = "http://xx.xx.xx.xx/api/static/chrismas.jpg"
         rdata['authors'].append(item)
     return HttpResponse(json.dumps(rdata), content_type='application/json')
 
@@ -69,9 +69,9 @@ def author_view(request, authorid=''):
     if authorid == '':
         return HttpResponse(status=404)
 
-    url = 'http://82.156.177.164:9939/mergeauthors/_search?'
-    url_paper1 = 'http://82.156.177.164:9939/paper_col/_search?'
-    url_paper2 = 'http://82.156.177.164:9939/mergepaper/_search?'
+    url = 'http://xx.xx.xx.xx:yyyy/mergeauthors/_search?'
+    url_paper1 = 'http://xx.xx.xx.xx:yyyy/paper_col/_search?'
+    url_paper2 = 'http://xx.xx.xx.xx:yyyy/mergepaper/_search?'
     headers = {'Content-Type': 'application/json'}
     args = dict()
     args['query'] = {'match': {'authorId': '%s' % authorid}}
@@ -88,7 +88,7 @@ def author_view(request, authorid=''):
         rdata["academicTitle"] = "🎅"
     if 'affiliations' not in rdata:
         rdata['affiliations'] = ["🎈", "🎄", "🤶"]
-    rdata["photoUrl"] = "http://82.156.177.164/api/static/chrismas.jpg"
+    rdata["photoUrl"] = "http://xx.xx.xx.xx/api/static/chrismas.jpg"
     papers_list = list()
     fields_of_study = dict()
     rdata['realPaperCount'] = rdata['paperCount']
